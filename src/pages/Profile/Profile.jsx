@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { User, LogOut, Settings, Package, Heart, Edit2, ShoppingCart, Mail, Moon, Shield, Sun } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { User, LogOut, Settings, Package, Heart, Edit2, ShoppingCart, Mail, Moon, Shield, Sun, CheckCircle } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import './Profile.css';
 
@@ -17,10 +17,13 @@ const MOCK_WISHLIST = [
 const Profile = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('account');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'account');
+  const [orderSuccess, setOrderSuccess] = useState(location.state?.orderPlaced || false);
   const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.getAttribute('data-theme') === 'dark');
   const [emailEnabled, setEmailEnabled] = useState(true);
   const [twoFactor, setTwoFactor] = useState(false);
+  const [orders, setOrders] = useState(MOCK_ORDERS);
 
   useEffect(() => {
     const currentTheme = localStorage.getItem('theme');
@@ -29,6 +32,21 @@ const Profile = () => {
       setIsDarkMode(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (orderSuccess) {
+      if (location.state?.newOrder) {
+        setOrders(prev => {
+          if (prev.some(o => o.id === location.state.newOrder.id)) return prev;
+          return [location.state.newOrder, ...prev];
+        });
+      }
+      // Clear route state so the message doesn't reappear on page refresh
+      navigate('/profile', { replace: true, state: {} });
+      const timer = setTimeout(() => setOrderSuccess(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [orderSuccess, location.state, navigate]);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
@@ -51,6 +69,12 @@ const Profile = () => {
 
   return (
     <div className="profile-page container animate-fade-in">
+      {orderSuccess && (
+        <div className="success-banner animate-fade-in" style={{ backgroundColor: '#dcfce7', border: '1px solid #bbf7d0', color: '#166534', padding: '1rem 1.5rem', borderRadius: '12px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: '500', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+          <CheckCircle size={24} />
+          Your order was placed successfully!
+        </div>
+      )}
       <div className="profile-header glass">
         <div className="profile-avatar">
           <User size={40} className="avatar-icon" />
@@ -123,9 +147,9 @@ const Profile = () => {
           {activeTab === 'orders' && (
             <div className="tab-pane animate-fade-in">
               <h2>My Orders</h2>
-              {MOCK_ORDERS.length > 0 ? (
+              {orders.length > 0 ? (
                 <div className="orders-list">
-                  {MOCK_ORDERS.map(order => (
+                  {orders.map(order => (
                     <div key={order.id} className="order-card">
                       <div className="order-info">
                         <h3>Order #{order.id}</h3>
