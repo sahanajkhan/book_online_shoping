@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import Profile from './pages/Profile/Profile';
 import Cart from './pages/Cart/Cart';
 import MyOrders from './pages/MyOrders/MyOrders';
+import Contact from './pages/Contact/Contact';
 
 function App() {
   const { user, loading } = React.useContext(AuthContext);
@@ -21,6 +22,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/track-order" element={<OrderTracking />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/my-orders" element={<MyOrders />} />

@@ -14,13 +14,17 @@ app.use(express.json());
 
 // Routes
 const authRoutes = require('./routes/auth');
+const contactRoutes = require('./routes/contact');
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/book_store')
-.then(() => console.log('Connected to local MongoDB (book_store)'))
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/book_store';
+mongoose.connect(MONGO_URI)
+.then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Failed to connect to MongoDB', err));
 
 app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });
+
