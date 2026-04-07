@@ -39,15 +39,31 @@
 .search-bar {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: var(--radius-xl);
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.15), var(--shadow-md);
+  border-color: rgba(99, 91, 255, 0.4);
+  transform: translateY(-2px);
+  background: #ffffff;
 }
 
 .search-icon {
   color: var(--text-secondary);
   margin-left: 1rem;
+  transition: color 0.3s ease;
+}
+
+.search-bar:focus-within .search-icon {
+  color: var(--accent-color);
 }
 
 .search-input {
@@ -55,7 +71,7 @@
   border: none;
   background: transparent;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-primary);
   outline: none;
   min-width: 0; /* Prevents overflow in flexbox */
@@ -63,10 +79,18 @@
 
 .search-input::placeholder {
   color: #a0aec0;
+  transition: opacity 0.3s ease;
+}
+
+.search-bar:focus-within .search-input::placeholder {
+  opacity: 0.6;
 }
 
 .search-btn {
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .books-section {

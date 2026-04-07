@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, LogIn, BookOpen } from 'lucide-react';
+import { ShoppingCart, User, LogIn, BookOpen, Package, Truck } from 'lucide-react';
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
 import './Navbar.css';
@@ -18,7 +18,7 @@ const Navbar = () => {
           <span className="logo-text">LuminaBooks</span>
         </Link>
         
-        <div className="navbar-links">
+        <div className="navbar-links" style={{ alignItems: 'center' }}>
           <Link 
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
@@ -26,10 +26,20 @@ const Navbar = () => {
             Home
           </Link>
           <Link 
-            to="/track-order" 
-            className={`nav-link ${location.pathname === '/track-order' ? 'active' : ''}`}
+            to="/my-orders" 
+            className="btn-outline"
+            style={{ padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem' }}
           >
-            Track Order
+            <Package size={16} />
+            <span>My Orders</span>
+          </Link>
+          <Link 
+            to="/track-order" 
+            className="btn-outline"
+            style={{ padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem' }}
+          >
+            <Truck size={16} />
+            <span>Track Order</span>
           </Link>
         </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BookCard from '../../components/BookCard/BookCard';
 import { Search } from 'lucide-react';
 import './Home.css';
@@ -46,10 +46,59 @@ const MOCK_BOOKS = [
     author: "Andrew Hunt",
     price: 39.99,
     image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 7,
+    title: "You Don't Know JS",
+    author: "Kyle Simpson",
+    price: 29.50,
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 8,
+    title: "Eloquent JavaScript",
+    author: "Marijn Haverbeke",
+    price: 25.00,
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 9,
+    title: "Design Patterns",
+    author: "Erich Gamma, Richard Helm",
+    price: 45.99,
+    image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 10,
+    title: "The Lean Startup",
+    author: "Eric Ries",
+    price: 18.99,
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 11,
+    title: "Sapiens",
+    author: "Yuval Noah Harari",
+    price: 24.50,
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 12,
+    title: "Deep Work",
+    author: "Cal Newport",
+    price: 21.00,
+    image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
   }
 ];
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredBooks = MOCK_BOOKS.filter(book => 
+    book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    book.author.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="home-page">
       <section className="hero-section container">
@@ -61,7 +110,13 @@ const Home = () => {
           </p>
           <div className="search-bar glass">
             <Search className="search-icon" size={20} />
-            <input type="text" placeholder="Search by title, author, or ISBN..." className="search-input" />
+            <input 
+              type="text" 
+              placeholder="Search by title, author, or ISBN..." 
+              className="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <button className="btn-primary search-btn">Search</button>
           </div>
         </div>
@@ -74,9 +129,15 @@ const Home = () => {
         </div>
         
         <div className="books-grid">
-          {MOCK_BOOKS.map(book => (
-            <BookCard key={book.id} book={book} />
-          ))}
+          {filteredBooks.length > 0 ? (
+            filteredBooks.map(book => (
+              <BookCard key={book.id} book={book} />
+            ))
+          ) : (
+            <p className="no-results-msg" style={{ gridColumn: "1 / -1", textAlign: "center", padding: "3rem", color: "var(--text-secondary)" }}>
+              No books found matching "{searchQuery}"
+            </p>
+          )}
         </div>
       </section>
     </div>
