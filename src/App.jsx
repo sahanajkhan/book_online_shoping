@@ -7,6 +7,7 @@ import OrderTracking from './pages/OrderTracking/OrderTracking';
 import Login from './pages/Login/Login';
 import Profile from './pages/Profile/Profile';
 import Cart from './pages/Cart/Cart';
+import MyOrders from './pages/MyOrders/MyOrders';
 
 function App() {
   const { user, loading } = React.useContext(AuthContext);
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/track-order" element={<OrderTracking />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/profile" />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
           </Routes>
