@@ -14,7 +14,9 @@ app.use(express.json());
 
 // Routes
 const authRoutes = require('./routes/auth');
+const contactRoutes = require('./routes/contact');
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Connect to MongoDB
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/book_store';

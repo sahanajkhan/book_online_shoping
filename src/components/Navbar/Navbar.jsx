@@ -26,6 +26,12 @@ const Navbar = () => {
             Home
           </Link>
           <Link 
+            to="/contact" 
+            className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+          >
+            Contact
+          </Link>
+          <Link 
             to="/my-orders" 
             className="btn-outline"
             style={{ padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem' }}
