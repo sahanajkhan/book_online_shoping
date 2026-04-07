@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, LogIn, BookOpen, Package, Truck } from 'lucide-react';
+import { ShoppingCart, User, LogIn, BookOpen, Package, Truck, Home, Mail } from 'lucide-react';
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
 import './Navbar.css';
@@ -22,14 +22,18 @@ const Navbar = () => {
           <Link 
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
           >
-            Home
+            <Home size={18} />
+            <span>Home</span>
           </Link>
           <Link 
             to="/contact" 
             className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
           >
-            Contact
+            <Mail size={18} />
+            <span>Contact</span>
           </Link>
           <Link 
             to="/my-orders" 
