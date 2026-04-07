@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, LogOut, Settings, Package, Heart, Edit2, ShoppingCart } from 'lucide-react';
+import { User, LogOut, Settings, Package, Heart, Edit2, ShoppingCart, Mail, Moon, Shield, Sun } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import './Profile.css';
 
@@ -19,6 +19,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('account');
   const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.getAttribute('data-theme') === 'dark');
+  const [emailEnabled, setEmailEnabled] = useState(true);
+  const [twoFactor, setTwoFactor] = useState(false);
 
   useEffect(() => {
     const currentTheme = localStorage.getItem('theme');
@@ -166,33 +168,44 @@ const Profile = () => {
             <div className="tab-pane animate-fade-in">
               <h2>Preferences & Settings</h2>
               <div className="settings-list">
-                <div className="setting-toggle">
-                  <div className="setting-info">
-                    <h4>Email Notifications</h4>
-                    <p>Receive order updates and promotions via email.</p>
+                <div className="setting-toggle" onClick={() => setEmailEnabled(!emailEnabled)}>
+                  <div className="setting-left">
+                    <div className={`setting-icon ${emailEnabled ? 'active' : 'inactive'}`}><Mail className="setting-svg" /></div>
+                    <div className="setting-info">
+                      <h4>Email Notifications</h4>
+                      <p>Receive order updates and promotions via email.</p>
+                    </div>
                   </div>
-                  <label className="switch">
-                    <input type="checkbox" defaultChecked />
+                  <label className="switch" onClick={(e) => e.stopPropagation()}>
+                    <input type="checkbox" checked={emailEnabled} onChange={(e) => setEmailEnabled(e.target.checked)} />
                     <span className="slider round"></span>
                   </label>
                 </div>
-                <div className="setting-toggle">
-                  <div className="setting-info">
-                    <h4>Dark Mode</h4>
-                    <p>Change the application theme to dark mode.</p>
+                <div className="setting-toggle" onClick={toggleDarkMode}>
+                  <div className="setting-left">
+                    <div className={`setting-icon ${isDarkMode ? 'active' : 'inactive'}`}>
+                      {isDarkMode ? <Moon className="setting-svg" /> : <Sun className="setting-svg" />}
+                    </div>
+                    <div className="setting-info">
+                      <h4>Dark Mode</h4>
+                      <p>Change the application theme to dark mode.</p>
+                    </div>
                   </div>
-                  <label className="switch">
+                  <label className="switch" onClick={(e) => e.stopPropagation()}>
                     <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
                     <span className="slider round"></span>
                   </label>
                 </div>
-                <div className="setting-toggle">
-                  <div className="setting-info">
-                    <h4>Two-Factor Authentication</h4>
-                    <p>Secure your account with 2FA.</p>
+                <div className="setting-toggle" onClick={() => setTwoFactor(!twoFactor)}>
+                  <div className="setting-left">
+                    <div className={`setting-icon ${twoFactor ? 'active' : 'inactive'}`}><Shield className="setting-svg" /></div>
+                    <div className="setting-info">
+                      <h4>Two-Factor Authentication</h4>
+                      <p>Secure your account with 2FA.</p>
+                    </div>
                   </div>
-                  <label className="switch">
-                    <input type="checkbox" />
+                  <label className="switch" onClick={(e) => e.stopPropagation()}>
+                    <input type="checkbox" checked={twoFactor} onChange={(e) => setTwoFactor(e.target.checked)} />
                     <span className="slider round"></span>
                   </label>
                 </div>
