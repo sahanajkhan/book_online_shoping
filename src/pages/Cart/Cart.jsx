@@ -9,9 +9,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    // In a real app we'd save the order here
-    clearCart();
-    navigate('/my-orders');
+    navigate('/checkout');
   };
 
   if (cart.length === 0) {
