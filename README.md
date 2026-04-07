@@ -1,16 +1,43 @@
-# React + Vite
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔧 Environment Variables
 
-Currently, two official plugins are available:
+| Variable | Description | Example |
+|---|---|---|
+| `MONGO_URI` | MongoDB connection string | `mongodb://127.0.0.1:27017/book_store` |
+| `PORT` | Port for the Express server | `5000` |
+| `EMAIL_USER` | Gmail address for Nodemailer | `you@gmail.com` |
+| `EMAIL_PASS` | 16-digit Google App Password | `abcd efgh ijkl mnop` |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> ⚠️ **Never commit your `.env` file.** Ensure `.env` is listed in `.gitignore`.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🤝 Contributing
 
-## Expanding the ESLint configuration
+Contributions are welcome! To get started:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Fork** the repository
+2. **Create a branch** for your feature or fix:
+```bash
+   git checkout -b feature/your-feature-name
+```
+3. **Commit** your changes with clear messages:
+```bash
+   git commit -m "feat: add book search functionality"
+```
+4. **Push** to your fork and open a **Pull Request** against `main`
+
+Please ensure your code is clean, well-commented, and doesn't break existing functionality before submitting.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to use, fork, and build upon it.
+
+---
+
+<div align="center">
+  Made with ❤️ and lots of ☕ &nbsp;|&nbsp; Happy reading! 📖
+</div>
