@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
 import { CartContext } from '../../context/CartContext';
 import './Cart.css';
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    // In a real app we'd save the order here
+    clearCart();
+    navigate('/my-orders');
+  };
 
   if (cart.length === 0) {
     return (
@@ -71,7 +78,7 @@ const Cart = () => {
             <span>Total</span>
             <span>${(getCartTotal() + 4.99 + (getCartTotal() * 0.08)).toFixed(2)}</span>
           </div>
-          <button className="btn-primary checkout-btn">
+          <button className="btn-primary checkout-btn" onClick={handleCheckout}>
             Proceed to Checkout <ArrowRight size={18} />
           </button>
         </div>
