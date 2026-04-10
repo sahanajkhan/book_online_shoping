@@ -51,7 +51,7 @@
 
 .search-bar:focus-within {
   box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.15), var(--shadow-md);
-  border-color: rgba(99, 91, 255, 0.4);
+  border-color: rgba(76, 67, 247, 0.4);
   transform: translateY(-2px);
   background: #ffffff;
 }

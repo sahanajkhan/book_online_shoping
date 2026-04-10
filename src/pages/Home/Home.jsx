@@ -88,6 +88,34 @@ const MOCK_BOOKS = [
     author: "Cal Newport",
     price: 21.00,
     image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 13,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    price: 15.99,
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 14,
+    title: "Project Hail Mary",
+    author: "Andy Weir",
+    price: 28.50,
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 15,
+    title: "Dune",
+    author: "Frank Herbert",
+    price: 22.99,
+    image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: 16,
+    title: "Principles",
+    author: "Ray Dalio",
+    price: 32.00,
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600"
   }
 ];
 
