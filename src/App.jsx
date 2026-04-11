@@ -10,6 +10,7 @@ import Cart from './pages/Cart/Cart';
 import MyOrders from './pages/MyOrders/MyOrders';
 import Contact from './pages/Contact/Contact';
 import Checkout from './pages/Checkout/Checkout';
+import BookDetails from './pages/BookDetails/BookDetails';
 
 function App() {
   const { user, loading } = React.useContext(AuthContext);
@@ -23,6 +24,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/book/:id" element={<BookDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/track-order" element={<OrderTracking />} />
             <Route path="/cart" element={<Cart />} />

@@ -1,18 +1,25 @@
 import React, { useContext } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { CartContext } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 import './BookCard.css';
 
 const BookCard = ({ book }) => {
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.stopPropagation();
     addToCart(book);
     // Optional: Could add a toast notification here
   };
 
+  const handleCardClick = () => {
+    navigate(`/book/${book.id}`);
+  };
+
   return (
-    <div className="book-card glass">
+    <div className="book-card glass" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <div className="book-image-container">
         <img src={book.image} alt={book.title} className="book-image" />
         <div className="book-badge">Available</div>
