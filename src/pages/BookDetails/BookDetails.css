@@ -1,0 +1,231 @@
+.book-details-page {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  transform: translateX(-5px);
+}
+
+.book-details-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .book-details-layout {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+.book-details-image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(255,255,255,1), rgba(240,242,245,0.7));
+}
+
+.book-details-image {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.book-details-image-wrapper:hover .book-details-image {
+  transform: scale(1.02);
+}
+
+.book-details-badge {
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+}
+
+.book-details-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-details-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.book-details-author {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.book-details-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.book-details-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stars-container {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.star-icon {
+  color: #d1d5db;
+}
+
+.star-icon.filled {
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.star-icon.half-filled {
+  color: #fbbf24;
+  fill: url(#halfGradient); /* If SVG had gradient */
+  opacity: 0.7; /* Simple half star representation */
+}
+
+.rating-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.book-details-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+}
+
+.book-details-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.book-details-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.add-to-cart-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 300px;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.add-to-cart-large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* Bottom section: Look Inside */
+.book-preview-section {
+  padding-top: 3rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.preview-pages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .preview-pages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.preview-page-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  padding: 1rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.preview-page-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  display: block;
+}
+
+.book-details-loading {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+}
