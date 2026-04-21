@@ -1,0 +1,7 @@
+{
+  "name": "book_store",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
