@@ -18,8 +18,8 @@ const contactRoutes = require('./routes/contact');
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 
-// Connect to MongoDB
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/book_store';
+// Connect to MongoDB Atlas
+const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Failed to connect to MongoDB', err));
