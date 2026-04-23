@@ -11,6 +11,7 @@ import MyOrders from './pages/MyOrders/MyOrders';
 import Contact from './pages/Contact/Contact';
 import Checkout from './pages/Checkout/Checkout';
 import BookDetails from './pages/BookDetails/BookDetails';
+import AddBook from './pages/Admin/AddBook';
 
 function App() {
   const { user, loading } = React.useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/profile" />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+            <Route path="/admin/add-book" element={<AddBook />} />
           </Routes>
         </main>
       </div>
