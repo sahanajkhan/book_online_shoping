@@ -139,8 +139,44 @@
   box-shadow: var(--shadow-md);
 }
 
+.mobile-menu-btn {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+
   .navbar-links {
-    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100vw;
+    background: var(--surface-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 99;
+  }
+  
+  .navbar-links.active {
+    transform: translateY(0);
+  }
+  
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
   }
 }
+
