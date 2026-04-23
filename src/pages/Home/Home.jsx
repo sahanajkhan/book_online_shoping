@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BookCard from '../../components/BookCard/BookCard';
 import { Search } from 'lucide-react';
 import './Home.css';
 
 import { MOCK_BOOKS } from '../../data/books';
+import axios from 'axios';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredBooks = MOCK_BOOKS.filter(book => 
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/books');
+        if (res.data && res.data.length > 0) {
+          setBooks(res.data);
+        } else {
+          setBooks(MOCK_BOOKS); // Fallback if DB is empty
+        }
+      } catch (err) {
+        console.error('Failed to fetch books, using mock data fallback', err);
+        setBooks(MOCK_BOOKS); // Fallback if DB is down
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBooks();
+  }, []);
+
+  const filteredBooks = books.filter(book => 
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
     book.author.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -43,9 +65,13 @@ const Home = () => {
         </div>
         
         <div className="books-grid">
-          {filteredBooks.length > 0 ? (
+          {loading ? (
+            <div style={{ gridColumn: "1 / -1", textAlign: "center", padding: "3rem", color: "var(--text-secondary)" }}>
+              Loading books...
+            </div>
+          ) : filteredBooks.length > 0 ? (
             filteredBooks.map(book => (
-              <BookCard key={book.id} book={book} />
+              <BookCard key={book._id || book.id} book={book} />
             ))
           ) : (
             <p className="no-results-msg" style={{ gridColumn: "1 / -1", textAlign: "center", padding: "3rem", color: "var(--text-secondary)" }}>

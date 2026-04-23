@@ -1,6 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+<<<<<<< HEAD
+import { ShoppingCart, User, LogIn, BookOpen, Package, Truck, Home, Mail, PlusCircle } from 'lucide-react';
+=======
 import { ShoppingCart, User, LogIn, BookOpen, Package, Truck, Home, Mail, Menu, X } from 'lucide-react';
+>>>>>>> 8d5dac75841676e7425d05b927c1b42e3318680f
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
 import './Navbar.css';
@@ -55,6 +59,27 @@ const Navbar = () => {
             <Package size={16} />
             <span>My Orders</span>
           </Link>
+<<<<<<< HEAD
+            <Link 
+              to="/track-order" 
+              className="btn-outline"
+              style={{ padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem' }}
+            >
+              <Truck size={16} />
+              <span>Track Order</span>
+            </Link>
+            {user && user.isAdmin && (
+              <Link 
+                to="/admin/add-book" 
+                className="btn-outline"
+                style={{ padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}
+              >
+                <PlusCircle size={16} />
+                <span>Add Book</span>
+              </Link>
+            )}
+          </div>
+=======
           <Link 
             to="/track-order" 
             className="btn-outline"
@@ -65,6 +90,7 @@ const Navbar = () => {
             <span>Track Order</span>
           </Link>
         </div>
+>>>>>>> 8d5dac75841676e7425d05b927c1b42e3318680f
 
         <div className="navbar-actions">
           <Link to="/cart" className="icon-btn" aria-label="Cart" onClick={closeMobileMenu}>

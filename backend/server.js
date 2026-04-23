@@ -15,8 +15,10 @@ app.use(express.json());
 // Routes
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact');
+const bookRoutes = require('./routes/books');
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/books', bookRoutes);
 
 // Connect to MongoDB Atlas
 const MONGO_URI = process.env.MONGO_URI;

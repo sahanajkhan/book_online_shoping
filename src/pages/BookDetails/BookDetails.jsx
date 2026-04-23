@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import { MOCK_BOOKS } from '../../data/books';
@@ -15,16 +16,36 @@ const BookDetails = () => {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
     
-    const foundBook = MOCK_BOOKS.find(b => b.id === parseInt(id));
-    if (foundBook) {
-      setBook(foundBook);
-    }
+    const fetchBookDetails = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/books/${id}`);
+        setBook(res.data);
+      } catch (err) {
+        console.error('Failed to fetch book from API, trying local fallback', err);
+        // Fallback to MOCK_BOOKS if API fails or book is local only (like id=1,2,3 instead of Mongo ObjectId)
+        const foundBook = MOCK_BOOKS.find(b => b.id === parseInt(id) || b.id === id || b._id === id);
+        if (foundBook) {
+          setBook(foundBook);
+        } else {
+          setBook({ error: true });
+        }
+      }
+    };
+    fetchBookDetails();
   }, [id]);
 
   if (!book) {
     return (
       <div className="book-details-loading">
         <h2>Loading book details...</h2>
+      </div>
+    );
+  }
+
+  if (book.error) {
+    return (
+      <div className="book-details-loading">
+        <h2>Book not found!</h2>
       </div>
     );
   }
