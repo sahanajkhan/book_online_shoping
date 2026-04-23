@@ -6,7 +6,12 @@ import './Login.css';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  // Pre-filled with demo credentials for presentation
+  const [formData, setFormData] = useState({ 
+    name: 'Demo Presenter', 
+    email: 'demo@user.com', 
+    password: 'demo123' 
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
