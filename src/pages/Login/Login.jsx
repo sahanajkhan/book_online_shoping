@@ -1,12 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LogIn, UserPlus } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { LogIn, UserPlus, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import './Login.css';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  // Pre-filled with demo credentials for presentation
+  const [formData, setFormData] = useState({ 
+    name: 'Demo Presenter', 
+    email: 'demo@user.com', 
+    password: 'demo123' 
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -39,71 +44,103 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page container animate-fade-in">
-      <div className="login-card glass">
-        <div className="login-header">
-          <h2>{isLogin ? 'Welcome Back' : 'Create an Account'}</h2>
-          <p>{isLogin ? 'Enter your credentials to access your account' : 'Join LuminaBooks today to manage your orders'}</p>
+    <div className="login-layout animate-fade-in">
+      <div className="login-image-section">
+        <div className="login-image-overlay">
+          <Link to="/" className="back-link">
+            <ArrowLeft size={20} /> Back to Home
+          </Link>
+          <div className="quote-container">
+            <h1>"A reader lives a thousand lives before he dies."</h1>
+            <p>- George R.R. Martin</p>
+          </div>
         </div>
+      </div>
 
-        {error && <div className="error-message">{error}</div>}
-
-        <form onSubmit={handleSubmit} className="login-form">
-          {!isLogin && (
-            <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value={formData.name} 
-                onChange={handleChange} 
-                required={!isLogin} 
-                placeholder="John Doe"
-              />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={formData.email} 
-              onChange={handleChange} 
-              required 
-              placeholder="you@example.com"
-            />
+      <div className="login-form-section">
+        <div className="login-card">
+          <div className="login-header">
+            <h2>{isLogin ? 'Welcome Back' : 'Create an Account'}</h2>
+            <p>{isLogin ? 'Enter your credentials to access your account' : 'Join LuminaBooks today to manage your orders'}</p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              value={formData.password} 
-              onChange={handleChange} 
-              required 
-              placeholder="••••••••"
-            />
-          </div>
+          {error && <div className="error-message animate-fade-in">{error}</div>}
 
-          <button type="submit" className="btn-primary submit-btn" disabled={loading}>
-            {loading ? 'Processing...' : (
-              isLogin ? <><LogIn size={18}/> Sign In</> : <><UserPlus size={18}/> Sign Up</>
+          <form onSubmit={handleSubmit} className="login-form">
+            {!isLogin && (
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <div className="input-wrapper">
+                  <User className="input-icon" size={18} />
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    required={!isLogin} 
+                    placeholder="John Doe"
+                  />
+                </div>
+              </div>
             )}
-          </button>
-        </form>
 
-        <div className="toggle-mode">
-          <p>
-            {isLogin ? "Don't have an account?" : "Already have an account?"}
-            <button className="toggle-btn" onClick={() => { setIsLogin(!isLogin); setError(''); }}>
-              {isLogin ? 'Sign Up' : 'Log In'}
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <div className="input-wrapper">
+                <Mail className="input-icon" size={18} />
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  required 
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="input-wrapper">
+                <Lock className="input-icon" size={18} />
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  value={formData.password} 
+                  onChange={handleChange} 
+                  required 
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+              {loading ? 'Processing...' : (
+                isLogin ? <><LogIn size={18}/> Sign In</> : <><UserPlus size={18}/> Sign Up</>
+              )}
             </button>
-          </p>
+            
+            <div className="divider-text">
+              <span>OR</span>
+            </div>
+
+            <button type="button" className="social-btn" onClick={() => alert("Google Login Coming Soon!")}>
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="social-icon" />
+              Continue with Google
+            </button>
+          </form>
+
+          <div className="toggle-mode">
+            <p>
+              {isLogin ? "Don't have an account?" : "Already have an account?"}
+              <button className="toggle-btn" onClick={() => { setIsLogin(!isLogin); setError(''); }}>
+                {isLogin ? 'Sign Up' : 'Log In'}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>
