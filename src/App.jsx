@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import Navbar from './components/Navbar/Navbar';
+import SplashScreen from './components/SplashScreen/SplashScreen';
 import Home from './pages/Home/Home';
 import OrderTracking from './pages/OrderTracking/OrderTracking';
 import Login from './pages/Login/Login';
@@ -15,6 +16,19 @@ import AddBook from './pages/Admin/AddBook';
 
 function App() {
   const { user, loading } = React.useContext(AuthContext);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    // Show splash screen for 2.5 seconds
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showSplash) {
+    return <SplashScreen />;
+  }
 
   if (loading) return null; // Avoid flicker during load
 

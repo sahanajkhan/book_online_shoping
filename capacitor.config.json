@@ -1,5 +1,9 @@
 {
   "appId": "com.bookstore.app",
   "appName": "Book Store",
-  "webDir": "dist"
+  "webDir": "dist",
+  "server": {
+    "cleartext": true
+  }
 }
+

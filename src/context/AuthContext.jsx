@@ -22,6 +22,19 @@ export const AuthProvider = ({ children }) => {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   const login = async (email, password) => {
+    // --- PRESENTATION BACKUP: Hardcoded Dummy User ---
+    if (email === 'demo@user.com' && password === 'demo123') {
+      const demoUser = { _id: 'demo123', name: 'Demo Presenter', email: 'demo@user.com' };
+      const demoToken = 'fake-demo-jwt-token-for-presentation';
+      
+      localStorage.setItem('token', demoToken);
+      localStorage.setItem('user', JSON.stringify(demoUser));
+      
+      setToken(demoToken);
+      setUser(demoUser);
+      return { success: true };
+    }
+
     try {
       const res = await axios.post(`${API_URL}/auth/login`, { email, password });
       const { token, ...userData } = res.data;
@@ -33,6 +46,22 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true };
     } catch (error) {
+      // --- EMERGENCY PRESENTATION FALLBACK ---
+      // If the backend fails completely during the presentation, log them in anyway
+      // to ensure the presentation can continue.
+      if (error.message === 'Network Error' || !error.response) {
+        console.warn("Backend unavailable. Activating emergency demo login to save presentation!");
+        const emergencyUser = { _id: 'emergency', name: 'Presenter (Offline Mode)', email: email };
+        const emergencyToken = 'offline-emergency-token';
+        
+        localStorage.setItem('token', emergencyToken);
+        localStorage.setItem('user', JSON.stringify(emergencyUser));
+        
+        setToken(emergencyToken);
+        setUser(emergencyUser);
+        return { success: true };
+      }
+      
       return { success: false, message: error.response?.data?.message || 'Login failed' };
     }
   };
@@ -49,6 +78,20 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true };
     } catch (error) {
+      // --- EMERGENCY PRESENTATION FALLBACK ---
+      if (error.message === 'Network Error' || !error.response) {
+        console.warn("Backend unavailable. Activating emergency demo registration!");
+        const emergencyUser = { _id: 'emergency', name: name, email: email };
+        const emergencyToken = 'offline-emergency-token';
+        
+        localStorage.setItem('token', emergencyToken);
+        localStorage.setItem('user', JSON.stringify(emergencyUser));
+        
+        setToken(emergencyToken);
+        setUser(emergencyUser);
+        return { success: true };
+      }
+      
       return { success: false, message: error.response?.data?.message || 'Registration failed' };
     }
   };
