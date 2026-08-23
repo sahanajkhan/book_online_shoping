@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # LuminaBooks - Online Book Shopping 📚
 
 LuminaBooks is a modern, responsive online bookstore application built with the MERN stack (MongoDB, Express, React, Node.js). It offers a rich, glassmorphism-styled UI and robust backend capabilities, providing an end-to-end shopping experience from cart management to multi-step checkout and real-time email contact forms.
@@ -279,4 +279,4 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, for
 <div align="center">
   Made with ❤️ and lots of ☕ &nbsp;|&nbsp; Happy reading! 📖
 </div>
->>>>>>> dd547cae10105bd23e6a39642036d04f2f98cf44
+
